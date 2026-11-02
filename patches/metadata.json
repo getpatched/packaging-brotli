@@ -12,7 +12,7 @@
       "upstream": {
         "repository": "https://github.com/google/brotli",
         "commit": "50a9b70a4d5e1443fc40927952276b68fffa83a0",
-        "url": "https://github.com/google/brotli/commit/50a9b70a4d5e1443fc40927952276b68fffa83a0"
+        "url": "https://github.com/google/brotli/commit/50a9b70a4d5e1443fc40927952276b68fffa83a0.patch"
       },
       "appliesTo": [
         {
