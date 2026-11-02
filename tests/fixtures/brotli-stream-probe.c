@@ -6,6 +6,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* The patch assigns the previously reserved decoder error value -17. Keep
+ * the probe source-compatible with the vulnerable Focal header, which does
+ * not yet expose the new symbolic enum name. */
+#define GETPATCHED_BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH (-17)
+
 int main(int argc, char **argv) {
   char hex[256];
   uint8_t malformed[128];
@@ -61,7 +66,8 @@ int main(int argc, char **argv) {
   error_code = BrotliDecoderGetErrorCode(state);
   printf("malformed_result=%d error=%d format_error=%d input_remaining=%zu output=%zu\n",
          (int)result, error_code,
-         (int)BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH, available_in, total_out);
+         GETPATCHED_BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH,
+         available_in, total_out);
   BrotliDecoderDestroyInstance(state);
 
   compatible = BrotliEncoderCompress(BROTLI_DEFAULT_QUALITY,

@@ -36,11 +36,11 @@
             },
             {
               "path": "tests/fixtures/brotli-stream-probe.c",
-              "sha256": "619b44dda85ab4ccf7f3543acae295a5ec1ff50f1465b4cf1afce633d5eb1d23"
+              "sha256": "d2a136a26758d569a33740bcd2f73b790703b99bc65ea7e50ee5359fc3648ff6"
             }
           ],
-          "baselineExpectation": "The vulnerable streaming decoder does not report BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH for the bounded malformed fixture.",
-          "patchedExpectation": "The patched decoder immediately reports BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH and a valid encode/decode round trip succeeds."
+          "baselineExpectation": "The vulnerable streaming decoder does not report the decoder error value -17 (reserved in the baseline headers) for the bounded malformed fixture.",
+          "patchedExpectation": "The patched decoder immediately reports decoder error value -17 (BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH) and a valid encode/decode round trip succeeds."
         }
       ]
     }
