@@ -11,9 +11,9 @@ GetPatched maintains selected security backports for distribution packages whose
 | GetPatched version | `1.0.7-6ubuntu0.1+getpatched1` |
 | Runtime packages | `libbrotli1`, `python3-brotli`, `brotli` |
 | Access | Sponsor first for 168 hours, then public after release checks |
-| State | Development candidate; no release binary is published |
+| State | Hosted verification passed; sponsor flow pending; no release binary published |
 
-Ubuntu's current advisory rates CVE-2026-111497 critical and lists Focal fixed only through ESM. GetPatched builds from the public non-ESM source above; it does not use ESM source or binaries. The signed Focal source indexes and all pinned file hashes have been checked. The source descriptor's separate uploader signature has not been verified. Package build and installed verification remain in progress; no candidate is release eligible or published.
+Ubuntu currently rates CVE-2026-111497 High priority with CVSS 9.8 and lists the Focal fix through ESM. GetPatched builds from the public non-ESM source above; it does not use ESM source or binaries. The signed Focal source indexes and all pinned file hashes have been checked. The source descriptor's separate uploader signature has not been verified. The hosted run passed the package suite, installed decoder regression and consumer check, removed the target CVE findings from the package-aware scan, and passed the signed APT-client check: [run 41492184315](https://github.com/getpatched/platform/actions/runs/41492184315). This verified candidate is not release-eligible while sponsor entitlement, revocation and promotion flow remain unverified; no production binary is published.
 
 ## Structure and patch
 
