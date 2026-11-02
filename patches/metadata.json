@@ -39,8 +39,8 @@
               "sha256": "b366ac5b9de0287ccbfe53a6e02ce8ab198650cfaf7b81a700ab7370d71db58a"
             }
           ],
-          "baselineExpectation": "The vulnerable decoder remains at NEEDS_MORE_OUTPUT (result/error 3) after reaching the fixture's strict 32 MiB/8,192-call bound, rather than reporting block-switch error -17; normal compression round-trip still succeeds.",
-          "patchedExpectation": "The patched decoder reports decoder error value -17 (BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH) while processing the bounded malformed stream, and a valid encode/decode round trip succeeds."
+          "baselineExpectation": "The baseline oracle expects BROTLI_DECODER_RESULT_ERROR (0) with decoderError -9 (BROTLI_DECODER_ERROR_FORMAT_BLOCK_LENGTH_1) after producing 16 MiB in 4,096 calls.",
+          "patchedExpectation": "The patched oracle expects decoderError -17 (BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH) within the 32 MiB/8,192-call hard bounds; normal compression round-trip must succeed."
         }
       ]
     }
