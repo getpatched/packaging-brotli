@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 2,
+  "id": "ubuntu-focal-amd64",
+  "base": {
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "codename": "focal",
+    "sourcePocket": "updates",
+    "architecture": "amd64"
+  },
+  "source": {
+    "format": "3.0 (quilt)",
+    "version": "1.0.7-6ubuntu0.1",
+    "publication": "https://api.launchpad.net/1.0/ubuntu/+archive/primary/+sourcepub/11647574",
+    "publishedAt": "2020-10-05T13:28:22.610446+00:00",
+    "descriptor": {
+      "name": "brotli_1.0.7-6ubuntu0.1.dsc",
+      "url": "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/brotli/1.0.7-6ubuntu0.1/brotli_1.0.7-6ubuntu0.1.dsc",
+      "sha256": "3a2959d18e10cbd4b8c258b0a8a524b315de20d214f10c53a48aface7cc3676d",
+      "bytes": 2385
+    },
+    "files": [
+      {
+        "name": "brotli_1.0.7.orig.tar.gz",
+        "role": "upstream-source",
+        "url": "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/brotli/1.0.7-6ubuntu0.1/brotli_1.0.7.orig.tar.gz",
+        "sha256": "4c61bfb0faca87219ea587326c467b95acb25555b53d1a421ffa3c8a9296ee2c",
+        "bytes": 23827908
+      },
+      {
+        "name": "brotli_1.0.7-6ubuntu0.1.debian.tar.xz",
+        "role": "ubuntu-packaging",
+        "url": "https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/brotli/1.0.7-6ubuntu0.1/brotli_1.0.7-6ubuntu0.1.debian.tar.xz",
+        "sha256": "a1c204cac9e247319726c8ac2a0635a3f5ee8c88b163aa2b7f33110a02975536",
+        "bytes": 13672
+      }
+    ],
+    "signatureVerification": {
+      "verified": false,
+      "note": "The signed Focal updates and security Sources indexes were verified and their SHA-256 records match these files. The source descriptor's OpenPGP signature was not separately verified."
+    }
+  },
+  "supportedSourceVersions": [
+    "1.0.7-6ubuntu0.1"
+  ],
+  "packageVersion": "1.0.7-6ubuntu0.1+getpatched1",
+  "releaseSerial": 1,
+  "changelog": {
+    "distribution": "focal",
+    "urgency": "critical",
+    "maintainer": "GetPatched Maintainers <packages@getpatched.dev>",
+    "date": "Mon, 02 Nov 2026 00:00:00 +0000"
+  },
+  "binaryPackages": [
+    "python3-brotli",
+    "brotli",
+    "libbrotli-dev",
+    "libbrotli1"
+  ],
+  "advisoryPackages": [
+    "python3-brotli",
+    "brotli",
+    "libbrotli1"
+  ],
+  "patches": [
+    "cve-2026-111497-invalid-block-switch"
+  ],
+  "releaseAccess": {
+    "policy": "sponsor-first",
+    "sponsorDelayHours": 168,
+    "sponsorEligibility": "any-active-individual-github-sponsorship-tier",
+    "earlyBinaryLicenseId": "LicenseRef-GetPatched-Early-Binary-1.2",
+    "publicContributionSpdx": "MIT",
+    "earlyUse": ["private", "commercial"],
+    "earlyRedistributionAllowed": false,
+    "publicLicenseScope": "getpatched-authored-contributions-only"
+  },
+  "status": "unreleased-development-candidate"
+}

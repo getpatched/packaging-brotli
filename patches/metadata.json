@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 3,
+  "patches": [
+    {
+      "id": "cve-2026-111497-invalid-block-switch",
+      "kind": "security",
+      "file": "CVE-2026-111497-focal.patch",
+      "sha256": "44209e642d901a6d7a554cd12743bd88614f5574754c54a7f9b9ea13a721d87a",
+      "title": "Reject invalid block switches before decoder state corruption",
+      "description": "Backports the upstream Brotli decoder fix so malformed block-switch input is returned as a permanent format error rather than accepted as a need for more input.",
+      "cves": ["CVE-2026-111497"],
+      "upstream": {
+        "repository": "https://github.com/google/brotli",
+        "commit": "50a9b70a4d5e1443fc40927952276b68fffa83a0",
+        "url": "https://github.com/google/brotli/commit/50a9b70a4d5e1443fc40927952276b68fffa83a0"
+      },
+      "appliesTo": [
+        {
+          "target": "ubuntu-focal-amd64",
+          "sourceVersion": "1.0.7-6ubuntu0.1"
+        }
+      ],
+      "dep3": {
+        "origin": "Backport of the upstream maintenance-branch fix, applied after Ubuntu's existing quilt patches.",
+        "forwarded": "not-needed",
+        "lastUpdate": "2026-11-02"
+      },
+      "tests": [
+        {
+          "id": "brotli-invalid-block-switch",
+          "runner": "getpatched/platform:verification/regression.py",
+          "fixtures": [
+            {
+              "path": "tests/fixtures/invalid-block-switch.hex",
+              "sha256": "075689ca12c7f6c8de397533eb49d4d5903c1c430432d0dfe7f505701ffa1cf8"
+            },
+            {
+              "path": "tests/fixtures/brotli-stream-probe.c",
+              "sha256": "619b44dda85ab4ccf7f3543acae295a5ec1ff50f1465b4cf1afce633d5eb1d23"
+            }
+          ],
+          "baselineExpectation": "The vulnerable streaming decoder does not report BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH for the bounded malformed fixture.",
+          "patchedExpectation": "The patched decoder immediately reports BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH and a valid encode/decode round trip succeeds."
+        }
+      ]
+    }
+  ]
+}
