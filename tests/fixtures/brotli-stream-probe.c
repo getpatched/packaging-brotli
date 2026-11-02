@@ -10,7 +10,8 @@
  * the probe source-compatible with the vulnerable Focal header, which does
  * not yet expose the new symbolic enum name. */
 #define GETPATCHED_BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH (-17)
-#define MAX_MALFORMED_OUTPUT (1024U * 1024U)
+#define MAX_MALFORMED_OUTPUT (32U * 1024U * 1024U)
+#define MAX_MALFORMED_CALLS 8192U
 
 int main(int argc, char **argv) {
   char hex[256];
@@ -77,7 +78,7 @@ int main(int argc, char **argv) {
     calls++;
     if (result != BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT ||
         output_this_call == 0 || total_out == total_out_before ||
-        total_out >= MAX_MALFORMED_OUTPUT || calls >= 256) {
+        total_out >= MAX_MALFORMED_OUTPUT || calls >= MAX_MALFORMED_CALLS) {
       break;
     }
   } while (1);
