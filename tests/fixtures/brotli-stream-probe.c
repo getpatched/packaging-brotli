@@ -10,17 +10,20 @@
  * the probe source-compatible with the vulnerable Focal header, which does
  * not yet expose the new symbolic enum name. */
 #define GETPATCHED_BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH (-17)
+#define MAX_MALFORMED_OUTPUT (1024U * 1024U)
 
 int main(int argc, char **argv) {
   char hex[256];
   uint8_t malformed[128];
   size_t malformed_size = 0;
-  uint8_t output[256];
+  uint8_t output[4096];
   size_t available_in;
   const uint8_t *next_in;
   size_t available_out = sizeof(output);
   uint8_t *next_out = output;
   size_t total_out = 0;
+  size_t output_this_call;
+  unsigned int calls = 0;
   BrotliDecoderState *state;
   BrotliDecoderResult result;
   int error_code;
@@ -61,13 +64,28 @@ int main(int argc, char **argv) {
   if (state == NULL) return 2;
   available_in = malformed_size;
   next_in = malformed;
-  result = BrotliDecoderDecompressStream(state, &available_in, &next_in,
-                                         &available_out, &next_out, &total_out);
+  do {
+    size_t total_out_before = total_out;
+    size_t output_capacity = sizeof(output);
+    size_t remaining = MAX_MALFORMED_OUTPUT - total_out;
+    if (output_capacity > remaining) output_capacity = remaining;
+    available_out = output_capacity;
+    next_out = output;
+    result = BrotliDecoderDecompressStream(state, &available_in, &next_in,
+                                           &available_out, &next_out, &total_out);
+    output_this_call = output_capacity - available_out;
+    calls++;
+    if (result != BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT ||
+        output_this_call == 0 || total_out == total_out_before ||
+        total_out >= MAX_MALFORMED_OUTPUT || calls >= 256) {
+      break;
+    }
+  } while (1);
   error_code = BrotliDecoderGetErrorCode(state);
-  printf("malformed_result=%d error=%d format_error=%d input_remaining=%zu output=%zu\n",
+  printf("malformed_result=%d error=%d format_error=%d input_remaining=%zu output=%zu calls=%u\n",
          (int)result, error_code,
          GETPATCHED_BROTLI_DECODER_ERROR_FORMAT_BLOCK_SWITCH,
-         available_in, total_out);
+         available_in, total_out, calls);
   BrotliDecoderDestroyInstance(state);
 
   compatible = BrotliEncoderCompress(BROTLI_DEFAULT_QUALITY,

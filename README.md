@@ -19,7 +19,7 @@ Ubuntu's current advisory rates CVE-2026-111497 critical and lists Focal fixed o
 
 `package-manifest.json` indexes target-specific recipe files. `targets/ubuntu/focal-amd64.json` pins the public source publication and archive files, their SHA-256 hashes, supported source version, output version and release policy. `patches/metadata.json` records the target-scoped backport, upstream commit, patch hash and regression expectations. `patches/CVE-2026-111497-focal.patch` backports upstream commit [`50a9b70`](https://github.com/google/brotli/commit/50a9b70a4d5e1443fc40927952276b68fffa83a0), applied after Ubuntu's existing quilt series.
 
-The small hex fixture is a malformed block-switch stream from a public CVE reproduction. The checked-in probe passes only that 22-byte input to the installed streaming decoder, records its result, and checks a separate normal compression round trip. It does not include the reproduction's HTTP service or wrapper. Run it only in the project's disposable test environment.
+The small hex fixture is a malformed block-switch stream from a public CVE reproduction. The checked-in probe feeds that 22-byte input to the installed streaming decoder in bounded 4 KiB output chunks, stopping at a terminal decoder result or after at most 1 MiB/256 calls. It records the result and checks a separate normal compression round trip. It does not include the reproduction's HTTP service or wrapper. Run it only in the project's disposable test environment.
 
 ## Sponsorship and licenses
 
