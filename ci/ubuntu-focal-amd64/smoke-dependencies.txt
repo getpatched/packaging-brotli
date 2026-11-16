@@ -1,0 +1,2 @@
+dpkg-dev
+python3-all
