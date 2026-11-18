@@ -26,3 +26,5 @@ The small hex fixture is a malformed block-switch stream from a public CVE repro
 All recipe source and patches are public from day one. For the official binary only, every active individual GitHub Sponsors tier gets access during the first seven days. Early binaries may be used privately and commercially; redistribution is prohibited until public promotion. Access ends when GitHub reports sponsorship inactive. GetPatched-authored material is MIT-licensed; the Brotli and Ubuntu source notices remain in force. See `LICENSES/GETPATCHED-EARLY-ACCESS-1.2.md` and `LICENSES/ubuntu-source-copyright`.
 
 Target support is specific to Ubuntu release and architecture. Adding another release or arm64 requires its own exact source pin, patch applicability check, build, installed regression, scan and APT test.
+
+[![advertisement](https://ads.servead.net/i/20512dfe-4e0b-4b9e-b64c-d20785399bcd.svg)](https://ads.servead.net/c/20512dfe-4e0b-4b9e-b64c-d20785399bcd)
